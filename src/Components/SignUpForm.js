@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = ({ setIsLoggedIn }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -18,6 +21,17 @@ const SignUpForm = ({ setIsLoggedIn }) => {
       [event.target.name]: event.target.value,
     }));
   };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if(formData.password !== formData.confirmPassword){
+      toast.error("Password not matching");
+      return;
+    }
+    setIsLoggedIn(true);
+    toast.success("Signed In Succesfully");
+    navigate("/dashboard");
+  }
   return (
     <div>
       {/* student - instructor tab */}
@@ -25,7 +39,7 @@ const SignUpForm = ({ setIsLoggedIn }) => {
         <button>Student</button>
         <button>Instructor</button>
       </div>
-      <form>
+      <form onSubmit={submitHandler}>
         {/* first and last name */}
         <div>
           <label>
@@ -106,7 +120,9 @@ const SignUpForm = ({ setIsLoggedIn }) => {
               required
             />
 
-            <span onClick={() => setShowPassword((prev) => !prev)}>
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </span>
           </label>
