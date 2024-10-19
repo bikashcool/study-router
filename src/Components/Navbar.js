@@ -8,12 +8,12 @@ const Navbar = (props) => {
   let setIsLoggedIn = props.setIsLoggedIn;
 
   return (
-    <div className="flex justify-evenly gap-4 text-2xl">
+    <div className="flex justify-between items-center max-w-[1160px] w-11/12 py-4 mx-auto">
       <Link to="/">
         <img alt="nav-logo" src={logo} width={160} height={32} loading="lazy" />
       </Link>
       <nav>
-        <ul className="flex gap-5">
+        <ul className="flex gap-x-6 text-white">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -27,15 +27,19 @@ const Navbar = (props) => {
       </nav>
 
       {/* Login - SignUp - LogOut - Dashboard */}
-      <div className="flex gap-4">
+      <div className="flex items-center gap-x-4">
         {!isLoggedIn && (
           <Link to="/login">
-            <button>Log In</button>
+            <button className="border border-[#3e3c3c8f] rounded-[8px] bg-[#1c2129] px-[12px] py-[8px] text-[#8c8686]">
+              Log In
+            </button>
           </Link>
         )}
         {isLoggedIn && (
           <Link to="/dashboard">
-            <button>dashboard</button>
+            <button className="border border-[#3e3c3c8f] rounded-[8px] bg-[#1c2129] px-[12px] py-[8px] text-[#8c8686]">
+              Dashboard
+            </button>
           </Link>
         )}
         {isLoggedIn && (
@@ -45,6 +49,7 @@ const Navbar = (props) => {
                 setIsLoggedIn(false);
                 toast.success("Logged Out");
               }}
+              className="border border-[#3e3c3c8f] rounded-[8px] bg-[#1c2129] px-[12px] py-[8px] text-[#8c8686]"
             >
               Log Out
             </button>
@@ -52,7 +57,9 @@ const Navbar = (props) => {
         )}
         {!isLoggedIn && (
           <Link to="/signup">
-            <button>Sign Up</button>
+            <button className="border border-[#3e3c3c8f] rounded-[8px] bg-[#1c2129] px-[12px] py-[8px] text-[#8c8686]">
+              Sign Up
+            </button>
           </Link>
         )}
       </div>
